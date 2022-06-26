@@ -53,7 +53,6 @@ $(document).ready(function (){
                         loadingDots = 0;
                     }
                 }, 500);
-
                 setTimeout(function(){
                     $.post('https://qb-multicharacter/setupCharacters');
                     setTimeout(function(){
@@ -335,3 +334,4 @@ qbMultiCharacters.resetAll = function() {
     $('.server-log').show();
     $('.server-log').css("top", "25%");
 }
+console.log('arab coding team')
