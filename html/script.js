@@ -87,8 +87,8 @@ $('.continue-btn').click(function(e){
 $('.disconnect-btn').click(function(e){
     e.preventDefault();
 
-    $.post('https://qb-multicharacter/closeUI');
-    $.post('https://qb-multicharacter/disconnectButton');
+    $.post('https://arabcodingteam-multicharacter/closeUI');
+    $.post('https://arabcodingteam-multicharacter/disconnectButton');
 });
 
 
@@ -179,6 +179,7 @@ $(document).on('click', '.RegisterGreen', function (e) {
 
     if(regTest.test(firstname) || regTest.test(lastname)){
         console.log("ERROR: You used a derogatory/vulgar term. Please try again!")
+	console.log("arab coding team on top arabcodingteam")
         success = false
         return false;
     }
@@ -190,7 +191,7 @@ $(document).on('click', '.RegisterGreen', function (e) {
     }
 
     if(success){
-        $.post('https://qb-multicharacter/createNewCharacter', JSON.stringify({
+        $.post('https://arabcodingteam-multicharacter/createNewCharacter', JSON.stringify({
             firstname: firstname,
             lastname: lastname,
             nationality: nationality,
