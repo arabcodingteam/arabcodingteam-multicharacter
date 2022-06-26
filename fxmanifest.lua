@@ -22,8 +22,8 @@ files {
 }
 
 dependencies {
-    'qb-core',
-    'qb-spawn'
+    'arabcodingteam-core',
+    'arabcodingteam-spawn'
 }
 
 lua54 'yes'
@@ -34,4 +34,4 @@ escrow_ignore {
     'client/main.lua',
     'server/main.lua',
 }
-dependency '/assetpacks'
+
