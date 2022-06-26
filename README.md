@@ -1,3 +1,4 @@
 # qb-multicharacter
 np style fixed
-https://cdn.discordapp.com/attachments/976460349454839848/988541826703175740/unknown.png
+dont use it if you dont know how to use it
+how i fix it i delete players data base and use qb-clothing
