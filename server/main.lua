@@ -83,7 +83,7 @@ RegisterNetEvent('arabcodingteam-multicharacter:server:loadUserData', function(c
         QBCore.Commands.Refresh(src)
         loadHouseData()
         TriggerClientEvent('apartments:client:setupSpawnUI', src, cData)
-        TriggerEvent("qb-log:server:CreateLog", "joinleave", "Loaded", "green", "**".. GetPlayerName(src) .. "** ("..(QBCore.Functions.GetIdentifier(src, 'discord') or 'undefined') .." |  ||"  ..(QBCore.Functions.GetIdentifier(src, 'ip') or 'undefined') ..  "|| | " ..(QBCore.Functions.GetIdentifier(src, 'license') or 'undefined') .." | " ..cData.citizenid.." | "..src..") loaded..")
+        TriggerEvent("arabcodingteam-log:server:CreateLog", "joinleave", "Loaded", "green", "**".. GetPlayerName(src) .. "** ("..(QBCore.Functions.GetIdentifier(src, 'discord') or 'undefined') .." |  ||"  ..(QBCore.Functions.GetIdentifier(src, 'ip') or 'undefined') ..  "|| | " ..(QBCore.Functions.GetIdentifier(src, 'license') or 'undefined') .." | " ..cData.citizenid.." | "..src..") loaded..")
 	end
 end)
 
@@ -106,7 +106,7 @@ RegisterNetEvent('arabcodingteam-multicharacter:server:createCharacter', functio
             print('^2[qb-core]^7 '..GetPlayerName(src)..' has succesfully loaded!')
             QBCore.Commands.Refresh(src)
             loadHouseData()
-            TriggerClientEvent("qb-multicharacter:client:closeNUIdefault", src)
+            TriggerClientEvent("arabcodingteam-multicharacter:client:closeNUIdefault", src)
             GiveStarterItems(src)
         end
 	end
