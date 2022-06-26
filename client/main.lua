@@ -1,6 +1,6 @@
 local cam = nil
 local charPed = nil
-local QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = exports['arabcodingteam-core']:GetCoreObject()
 local vehicle = nil
 local vehicleBack = nil
 local NewPeds = {}
@@ -12,7 +12,7 @@ CreateThread(function()
 		print('arabcodingteam')
 		Wait(0)
 		if NetworkIsSessionStarted() then
-			TriggerEvent('qb-multicharacter:client:chooseChar')
+			TriggerEvent('arabcodingteam-multicharacter:client:chooseChar')
 			return
 		end
 	end
@@ -21,7 +21,7 @@ end)
 -- Functions
 
 local function skyCam(bool)
-    TriggerEvent('qb-weathersync:client:EnableSync')
+    TriggerEvent('arabcodingteam-weathersync:client:EnableSync')
     if bool then
         DoScreenFadeIn(1000)
         SetTimecycleModifier('hud_def_blur')
@@ -96,7 +96,7 @@ local function spawnTrain()
 end
 
 local function openCharMenu(bool)
-    QBCore.Functions.TriggerCallback("qb-multicharacter:server:GetNumberOfCharacters", function(result)
+    QBCore.Functions.TriggerCallback("arabcodingteam-multicharacter:server:GetNumberOfCharacters", function(result)
         SetNuiFocus(bool, bool)
         SendNUIMessage({
             action = "ui",
@@ -109,7 +109,7 @@ end
 
 -- Events
 
-RegisterNetEvent('qb-multicharacter:client:closeNUIdefault', function() -- This event is only for no starting apartments
+RegisterNetEvent('arabcodingteam-multicharacter:client:closeNUIdefault', function() -- This event is only for no starting apartments
     DeleteEntity(charPed)
     for k, v in pairs(NewPeds) do
         SetEntityAsMissionEntity(v[1], true, true)
@@ -129,11 +129,11 @@ RegisterNetEvent('qb-multicharacter:client:closeNUIdefault', function() -- This 
     SetEntityVisible(PlayerPedId(), true)
     Wait(500)
     DoScreenFadeIn(250)
-    TriggerEvent('qb-weathersync:client:EnableSync')
-    -- TriggerEvent('qb-clothes:client:CreateFirstCharacter')
+    TriggerEvent('arabcodingteamarabcodingteam-weathersync:client:EnableSync')
+    -- TriggerEvent('arabcodingteam-clothes:client:CreateFirstCharacter')
 end)
 
-RegisterNetEvent('qb-multicharacter:client:closeNUI', function()
+RegisterNetEvent('arabcodingteam-multicharacter:client:closeNUI', function()
     DeleteEntity(charPed)
     for k, v in pairs(NewPeds) do
         SetEntityAsMissionEntity(v[1], true, true)
@@ -143,7 +143,7 @@ RegisterNetEvent('qb-multicharacter:client:closeNUI', function()
     SetNuiFocus(false, false)
 end)
 
-RegisterNetEvent('qb-multicharacter:client:chooseChar', function()
+RegisterNetEvent('arabcodingteam-multicharacter:client:chooseChar', function()
     SetNuiFocus(false, false)
     DoScreenFadeOut(10)
     Wait(1000)
@@ -174,14 +174,14 @@ RegisterNUICallback('disconnectButton', function()
         DeleteEntity(v[1])
     end
     NewPeds = {}
-    TriggerServerEvent('qb-multicharacter:server:disconnect')
+    TriggerServerEvent('arabcodingteam-multicharacter:server:disconnect')
 end)
 
 RegisterNUICallback('selectCharacter', function(data)
     local cData = data.cData
     deleteTrain()
     DoScreenFadeOut(10)
-    TriggerServerEvent('qb-multicharacter:server:loadUserData', cData)
+    TriggerServerEvent('arabcodingteam-multicharacter:server:loadUserData', cData)
     openCharMenu(false)
     SetEntityAsMissionEntity(charPed, true, true)
     DeleteEntity(charPed)
@@ -199,7 +199,7 @@ RegisterNUICallback('setupCharacters', function()
         DeleteEntity(v[1])
     end
     NewPeds = {}
-    QBCore.Functions.TriggerCallback("qb-multicharacter:server:SetupNewCharacter", function(result)
+    QBCore.Functions.TriggerCallback("arabcodingteam-multicharacter:server:SetupNewCharacter", function(result)
         for k, v in pairs(result) do 
             local model = tonumber(v[1])
             if model ~= nil then
@@ -224,7 +224,7 @@ RegisterNUICallback('setupCharacters', function()
                     PlaceObjectOnGroundProperly(charPed)
                     SetBlockingOfNonTemporaryEvents(charPed, true)
                     local data = json.decode(v[2])
-                    TriggerEvent('qb-clothing:client:loadPlayerClothing', data, charPed)
+                    TriggerEvent('arabcodingteam-clothing:client:loadPlayerClothing', data, charPed)
                     NewPeds[k] = {charPed}
                 end)
             end
@@ -246,13 +246,13 @@ RegisterNUICallback('createNewCharacter', function(data)
     elseif cData.gender == "Female" then
         cData.gender = 1
     end
-    TriggerServerEvent('qb-multicharacter:server:createCharacter', cData)
+    TriggerServerEvent('arabcodingteam-multicharacter:server:createCharacter', cData)
     Wait(500)
 end)
 
 RegisterNUICallback('removeCharacter', function(data)
-    TriggerServerEvent('qb-multicharacter:server:deleteCharacter', data.citizenid)
-    TriggerEvent('qb-multicharacter:client:chooseChar')
+    TriggerServerEvent('arabcodingteam-multicharacter:server:deleteCharacter', data.citizenid)
+    TriggerEvent('arabcodingteam-multicharacter:client:chooseChar')
 end)
 
 
