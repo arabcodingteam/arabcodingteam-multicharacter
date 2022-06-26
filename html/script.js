@@ -54,7 +54,7 @@ $(document).ready(function (){
                     }
                 }, 500);
                 setTimeout(function(){
-                    $.post('https://qb-multicharacter/setupCharacters');
+                    $.post('https://arabcodingteam-multicharacter/setupCharacters');
                     setTimeout(function(){
                         clearInterval(DotsInterval);
                         loadingProgress = 0;
@@ -62,7 +62,7 @@ $(document).ready(function (){
                         $(".welcomescreen").fadeOut(150);
                         $(".SelectChar-NewMenu").fadeIn(150);
                         $(".NewbtnExpertMulti").fadeIn(150);
-                        $.post('https://qb-multicharacter/removeBlur');
+                        $.post('https://arabcodingteam-multicharacter/removeBlur');
                     }, 2000);
                 }, 2000);
             } else {
@@ -222,7 +222,7 @@ $(document).on('click', '.Expert-Register-ImageStyle', function(e){
 });
 
 $(document).on('click', '#accept-delete', function(e){
-    $.post('https://qb-multicharacter/removeCharacter', JSON.stringify({
+    $.post('https://arabcodingteam-multicharacter/removeCharacter', JSON.stringify({
         citizenid: selectedCSN
     }));
     $('.character-delete').fadeOut(150);
@@ -242,7 +242,7 @@ function refreshCharacters() {
     setTimeout(function(){
         $(selectedChar).removeClass("char-selected");
         selectedChar = null;
-        $.post('https://qb-multicharacter/setupCharacters');
+        $.post('https://arabcodingteam-multicharacter/setupCharacters');
         $("#delete").css({"display":"none"});
         $("#play").css({"display":"none"});
         qbMultiCharacters.resetAll();
@@ -283,7 +283,7 @@ $(document).on('click', '.SelectChar-SpawnChar', function(e) {
     e.preventDefault();
 
     if (selectedChar !== null) {
-        $.post('https://qb-multicharacter/selectCharacter', JSON.stringify({
+        $.post('https://arabcodingteam-multicharacter/selectCharacter', JSON.stringify({
             cData: CharDatas[selectedCSN]
         }));
         setTimeout(function(){
