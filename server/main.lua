@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = exports['arabcodingteam-core']:GetCoreObject()
 
 -- Functions
 
@@ -52,8 +52,8 @@ local function loadHouseData()
             }
         end
     end
-    TriggerClientEvent("qb-garages:client:houseGarageConfig", -1, HouseGarages)
-    TriggerClientEvent("qb-houses:client:setHouseConfig", -1, Houses)
+    TriggerClientEvent("arabcodingteam-garages:client:houseGarageConfig", -1, HouseGarages)
+    TriggerClientEvent("arabcodingteam-houses:client:setHouseConfig", -1, Houses)
 end
 
 -- Commands
@@ -61,22 +61,22 @@ end
 QBCore.Commands.Add("logout", "Logout of Character (Admin Only)", {}, false, function(source)
     local src = source
     QBCore.Player.Logout(src)
-    TriggerClientEvent('qb-multicharacter:client:chooseChar', src)
+    TriggerClientEvent('arabcodingteam-multicharacter:client:chooseChar', src)
 end, "admin")
 
 QBCore.Commands.Add("closeNUI", "Close Multi NUI", {}, false, function(source)
     local src = source
-    TriggerClientEvent('qb-multicharacter:client:closeNUI', src)
+    TriggerClientEvent('arabcodingteam-multicharacter:client:closeNUI', src)
 end)
 
 -- Events
 
-RegisterNetEvent('qb-multicharacter:server:disconnect', function()
+RegisterNetEvent('arabcodingteam-multicharacter:server:disconnect', function()
     local src = source
-    DropPlayer(src, "You have disconnected from QBCore")
+    DropPlayer(src, "You have disconnected from arabcodingteam")
 end)
 
-RegisterNetEvent('qb-multicharacter:server:loadUserData', function(cData)
+RegisterNetEvent('arabcodingteam-multicharacter:server:loadUserData', function(cData)
     local src = source
     if QBCore.Player.Login(src, cData.citizenid) then
         print('^2[qb-core]^7 '..GetPlayerName(src)..' (Citizen ID: '..cData.citizenid..') has succesfully loaded!')
@@ -87,7 +87,7 @@ RegisterNetEvent('qb-multicharacter:server:loadUserData', function(cData)
 	end
 end)
 
-RegisterNetEvent('qb-multicharacter:server:createCharacter', function(data)
+RegisterNetEvent('arabcodingteam-multicharacter:server:createCharacter', function(data)
     local src = source
     local newData = {}
     newData.cid = data.cid
@@ -99,7 +99,7 @@ RegisterNetEvent('qb-multicharacter:server:createCharacter', function(data)
             print('^2[qb-core]^7 '..GetPlayerName(src)..' has succesfully loaded!')
             QBCore.Commands.Refresh(src)
             loadHouseData()
-            TriggerClientEvent("qb-multicharacter:client:closeNUI", src)
+            TriggerClientEvent("arabcodingteam-multicharacter:client:closeNUI", src)
             TriggerClientEvent('apartments:client:setupSpawnUI', src, newData)
             GiveStarterItems(src)
         else
@@ -112,14 +112,14 @@ RegisterNetEvent('qb-multicharacter:server:createCharacter', function(data)
 	end
 end)
 
-RegisterNetEvent('qb-multicharacter:server:deleteCharacter', function(citizenid)
+RegisterNetEvent('arabcodingteam-multicharacter:server:deleteCharacter', function(citizenid)
     local src = source
     QBCore.Player.DeleteCharacter(src, citizenid)
 end)
 
 -- Callbacks
 
-QBCore.Functions.CreateCallback("qb-multicharacter:server:GetUserCharacters", function(source, cb)
+QBCore.Functions.CreateCallback("arabcodingteam-multicharacter:server:GetUserCharacters", function(source, cb)
     local src = source
     local license = QBCore.Functions.GetIdentifier(src, 'license')
 
@@ -128,13 +128,13 @@ QBCore.Functions.CreateCallback("qb-multicharacter:server:GetUserCharacters", fu
     end)
 end)
 
-QBCore.Functions.CreateCallback("qb-multicharacter:server:GetServerLogs", function(source, cb)
+QBCore.Functions.CreateCallback("arabcodingteam-multicharacter:server:GetServerLogs", function(source, cb)
     MySQL.Async.execute('SELECT * FROM server_logs', {}, function(result)
         cb(result)
     end)
 end)
 
-QBCore.Functions.CreateCallback("qb-multicharacter:server:GetNumberOfCharacters", function(source, cb)
+QBCore.Functions.CreateCallback("arabcodingteam-multicharacter:server:GetNumberOfCharacters", function(source, cb)
     local license = QBCore.Functions.GetIdentifier(source, 'license')
     local numOfChars = 0
 
@@ -153,7 +153,7 @@ QBCore.Functions.CreateCallback("qb-multicharacter:server:GetNumberOfCharacters"
     cb(numOfChars)
 end)
 
--- QBCore.Functions.CreateCallback("qb-multicharacter:server:setupCharacters", function(source, cb)
+-- QBCore.Functions.CreateCallback("arabcodingteam-multicharacter:server:setupCharacters", function(source, cb)
 --     local license = QBCore.Functions.GetIdentifier(source, 'license')
 --     local plyChars = {}
 --     MySQL.Async.fetchAll('SELECT * FROM players WHERE license = ?', {license}, function(result)
@@ -167,7 +167,7 @@ end)
 --     end)
 -- end)
 
--- QBCore.Functions.CreateCallback("qb-multicharacter:server:getSkin", function(source, cb, cid)
+-- QBCore.Functions.CreateCallback("arabcodingteam-multicharacter:server:getSkin", function(source, cb, cid)
 --     local result = MySQL.Sync.fetchAll('SELECT * FROM playerskins WHERE citizenid = ? AND active = ?', {cid, 1})
 --     if result[1] ~= nil then
 --         cb(result[1].model, result[1].skin)
@@ -176,7 +176,7 @@ end)
 --     end
 -- end)
 
-QBCore.Functions.CreateCallback("qb-multicharacter:server:SetupNewCharacter", function(source, cb)
+QBCore.Functions.CreateCallback("arabcodingteam-multicharacter:server:SetupNewCharacter", function(source, cb)
     local license = QBCore.Functions.GetIdentifier(source, 'license')
     local plyChars = {}
     MySQL.Async.fetchAll('SELECT * FROM players WHERE license = ?', {license}, function(result)
