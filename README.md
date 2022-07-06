@@ -1,10 +1,6 @@
 # arabcodingteam 
-np style fixed
-
-*
-
-
-dont use it if you dont know how to use it
+fucked np code 
+not working good
 
 *
 
